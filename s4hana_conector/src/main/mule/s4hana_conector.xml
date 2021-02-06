@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:batch="http://www.mulesoft.org/schema/mule/batch"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:s4hana="http://www.mulesoft.org/schema/mule/s4hana" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/s4hana http://www.mulesoft.org/schema/mule/s4hana/current/mule-s4hana.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1adc66a5-8c65-44e1-8cf5-4afb1034347b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="4f4a5489-e52a-4b8d-b5e6-5643a93b656b" basePath="/sap/c4c/odata/v1/c4codataapi">
+		<http:request-connection protocol="HTTPS" host="sandbox.api.sap.com" connectionIdleTimeout="30000000"/>
+	</http:request-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="3dee0845-95c7-4158-8cb4-83a63f3cddee" >
+		<file:connection workingDir="F:\tushar mulesoft\demo\output" />
+	</file:config>
+	<configuration-properties doc:name="Configuration properties" doc:id="6de70405-0f3c-483d-a790-d4004af9a4f5" file="common.properties" />
+	<flow name="s4hana_conectorFlow" doc:id="8506cfc4-6f6a-4866-a211-87359645ab6f" >
+		<http:listener doc:name="Listener" doc:id="b028eb87-6ace-41e4-85aa-085f26ec705b" config-ref="HTTP_Listener_config" path="/getSAP"/>
+		<http:request method="GET" doc:name="Request" doc:id="23068f7e-f9ee-430a-ac7c-b98262a5f2b7" config-ref="HTTP_Request_configuration" path="/CustomerOrderCollection">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"APIKey" : "q4HCcw7326HIlbajrujgfdlaxvNF2TjK",
+	"Accept" : "application/json"
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	"\$top" : "50",
+	"\$select" : "*"
+}]]]></http:query-params>
+		</http:request>
+		
+		<ee:transform doc:name="Transform Message" doc:id="05d69a6f-751f-4261-ab75-a4b750de37bd">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/java
+---
+payload.d.results map(data ,index)->{
+	ObjectID:data.ObjectID default "" ,
+	InformationLifeCycleStatusCode:data.InformationLifeCycleStatusCode default "" ,
+	InformationLifeCycleStatusCodeText:data.InformationLifeCycleStatusCodeText default "" ,
+	ID:data.ID default "" ,
+	LastChangeDate:data.LastChangeDate default "" ,
+	OrderExternalLifeCycleStatusCode:data.OrderExternalLifeCycleStatusCode default "" ,
+	OrderExternalLifeCycleStatusCodeText:data.OrderExternalLifeCycleStatusCodeText default "" ,
+	LanguageCode:data.LanguageCode default "" ,
+	LanguageCodeText:data.LanguageCodeText default "" ,
+	ProcessingTypeCode:data.ProcessingTypeCode default "" ,
+	ProcessingTypeCodeText:data.ProcessingTypeCodeText default "" ,
+	ItemListCancellationStatusCode:data.ItemListCancellationStatusCode default "" ,
+	ItemListCancellationStatusCodeText:data.ItemListCancellationStatusCodeText default "" ,
+	ItemListFulfilmentProcessingStatusCode:data.ItemListFulfilmentProcessingStatusCode default "" ,
+	ItemListFulfilmentProcessingStatusCodeText:data.ItemListFulfilmentProcessingStatusCodeText default "" ,
+	ConsistencyStatusCode:data.ConsistencyStatusCode default "" ,
+	ConsistencyStatusCodeText:data.ConsistencyStatusCodeText default "" ,
+	OverallBlockingStatusCode:data.OverallBlockingStatusCode default "" ,
+	OverallBlockingStatusCodeText:data.OverallBlockingStatusCodeText default "" ,
+	ReplicationProcessingStatusCode:data.ReplicationProcessingStatusCode default "" ,
+	ReplicationProcessingStatusCodeText:data.ReplicationProcessingStatusCodeText default "" ,
+	DistributionChannelCode:data.DistributionChannelCode default "" ,
+	DistributionChannelCodeText:data.DistributionChannelCodeText default "" ,
+	DivisionCode:data.DivisionCode default "" ,
+	DivisionCodeText:data.DivisionCodeText default "" ,
+	SalesOrganisationID:data.SalesOrganisationID default "" ,
+	SalesTerritoryID:data.SalesTerritoryID default "" ,
+	BuyerPartyID:data.BuyerPartyID default "" ,
+	DeliveryPriorityCode:data.DeliveryPriorityCode default "" ,
+	DeliveryPriorityCodeText:data.DeliveryPriorityCodeText default "" ,
+	EmployeeResponsiblePartyID:data.EmployeeResponsiblePartyID default "" ,
+	BuyerPartyName:data.BuyerPartyName default "" ,
+	EmployeeResponsiblePartyName:data.EmployeeResponsiblePartyName default "" ,
+	BuyerContactPartyID:data.BuyerContactPartyID default "" ,
+	BuyerContactPartyName:data.BuyerContactPartyName default "" ,
+	CurrencyCode:data.CurrencyCode default "" ,
+	CurrencyCodeText:data.CurrencyCodeText default "" ,
+	PriceDateTime:data.PriceDateTime default "" ,
+	ProductRecipientPartyID:data.ProductRecipientPartyID default "" ,
+	ProductRecipientPartyName:data.ProductRecipientPartyName default "" ,
+	RequestedFulfillmentStartDateTime:data.RequestedFulfillmentStartDateTime default "" ,
+	timeZoneCode:data.timeZoneCode default "" ,
+	timeZoneCodeText:data.timeZoneCodeText default "" ,
+	SalesUnitPartyID:data.SalesUnitPartyID default "" ,
+	CalculationStatusCode:data.CalculationStatusCode default "" ,
+	CalculationStatusCodeText:data.CalculationStatusCodeText default "" ,
+	ExternalPriceDocumentBaseBusinessTransactionDocumentUUID:data.ExternalPriceDocumentBaseBusinessTransactionDocumentUUID default "" ,
+	DateTime:data.DateTime default "" ,
+	MaintenanceModeInternalOnlyMainDiscount:data.MaintenanceModeInternalOnlyMainDiscount default "" ,
+	NetAmount:data.NetAmount default "" ,
+	GrossAmount:data.GrossAmount default "" ,
+	TaxAmount:data.TaxAmount default "" ,
+	NetWeightMeasure:data.NetWeightMeasure default "" ,
+	GrossWeightMeasure:data.GrossWeightMeasure default "" ,
+	VolumeMeasure:data.VolumeMeasure default "" ,
+	Simulate:data.Simulate as String default "" ,
+	SubmitForApproval:data.SubmitForApproval as String default "" ,
+	Transfer:data.Transfer as String default "" ,
+	WithdrawFromApproval:data.WithdrawFromApproval as String default "" ,
+	SetAsCompleted:data.SetAsCompleted as String default "" ,
+	EntityLastChangedOn:data.EntityLastChangedOn default "" ,
+	ETag:data.ETag default ""
+}
+
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<flow-ref doc:name="Flow Reference" doc:id="2798daf1-6e7b-414d-9b78-5e1b1b8ca61e" name="s4hana_conectorSub_Flow"/>
+	</flow>
+	<sub-flow name="s4hana_conectorSub_Flow" doc:id="f211f5ef-8851-429b-8653-2e7b8ecd89fd" >
+		<batch:job jobName="s4hana_conectorBatch_Job" doc:id="02025d5a-de75-44fb-93d9-33221cfbb3de" blockSize="50">
+			<batch:process-records>
+				<batch:step name="Batch_Step" doc:id="d66bae05-f5aa-47bc-8c47-70c3e2d722fa">
+					<batch:aggregator doc:name="Batch Aggregator" doc:id="912231dd-0e05-4ab7-959e-f66a725e51f3" size="10">
+						<file:write doc:name="Write" doc:id="5107bb71-e02d-4e1b-b629-788cadc53b65" config-ref="File_Config" path="#['Orders_10' ++ (now() as String {format:&quot;yyyy_MM_dd_HH_mm_ss_SSS&quot;}) ++ &quot;.csv&quot;]">
+							<file:content ><![CDATA[#[%dw 2.0
+output application/csv separator= "|"
+---
+payload]]]></file:content>
+
+						</file:write>
+					</batch:aggregator>
+				</batch:step>
+			</batch:process-records>
+		</batch:job>
+	</sub-flow>
+</mule>

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="orders_input_data" format="json">
+      <types:shape format="weave" example="examples/OrdersInput.json"><![CDATA[%dw 2.0
+
+type orders_input_data = {|
+  d: {|
+    results: Array<{|      "__metadata": {|        uri: String,         "type": String,         etag: String      |},       ObjectID: String,       InformationLifeCycleStatusCode: String,       InformationLifeCycleStatusCodeText: String,       ClassificationCode: String,       ClassificationCodeText: String,       BuyerID: String,       FulfilmentBlockingReasonCode: String,       FulfilmentBlockingReasonCodeText: String,       ID: String,       InvoicingBlockingReasonCode: String,       InvoicingBlockingReasonCodeText: String,       LastChangeDate: String,       OrderExternalLifeCycleStatusCode: String,       OrderExternalLifeCycleStatusCodeText: String,       Name: String,       LanguageCode: String,       LanguageCodeText: String,       ProcessingTypeCode: String,       ProcessingTypeCodeText: String,       ItemListCancellationStatusCode: String,       ItemListCancellationStatusCodeText: String,       ItemListFulfilmentProcessingStatusCode: String,       ItemListFulfilmentProcessingStatusCodeText: String,       ApprovalStatusCode: String,       ApprovalStatusCodeText: String,       ConsistencyStatusCode: String,       ConsistencyStatusCodeText: String,       OverallBlockingStatusCode: String,       OverallBlockingStatusCodeText: String,       ReplicationProcessingStatusCode: String,       ReplicationProcessingStatusCodeText: String,       DistributionChannelCode: String,       DistributionChannelCodeText: String,       DivisionCode: String,       DivisionCodeText: String,       SalesGroupID: String,       SalesOfficeID: String,       SalesOrganisationID: String,       SalesTerritoryID: String,       BuyerPartyID: String,       DeliveryPriorityCode: String,       DeliveryPriorityCodeText: String,       TransferLocationName: String,       EmployeeResponsiblePartyID: String,       BuyerPartyName: String,       EmployeeResponsiblePartyName: String,       BuyerContactPartyID: String,       BuyerContactPartyName: String,       CurrencyCode: String,       CurrencyCodeText: String,       PriceDateTime: String,       ProductRecipientPartyID: String,       ProductRecipientPartyName: String,       RequestedFulfillmentStartDateTime: String,       timeZoneCode: String,       timeZoneCodeText: String,       CancellationReasonCode: String,       CancellationReasonCodeText: String,       SalesUnitPartyID: String,       CalculationStatusCode: String,       CalculationStatusCodeText: String,       ExternalPriceDocumentBaseBusinessTransactionDocumentUUID: String,       PricingProcedureCode: String,       PricingProcedureCodeText: String,       DateTime: String,       OrderReasonCode: String,       OrderReasonCodeText: String,       MaintenanceModeInternalOnlyMainDiscount: String,       NetAmount: String,       NetAmountCurrencyCode: String,       NetAmountCurrencyCodeText: String,       GrossAmount: String,       GrossAmountCurrencyCode: String,       GrossAmountCurrencyCodeText: String,       TaxAmount: String,       TaxAmountCurrencyCode: String,       TaxAmountCurrencyCodeText: String,       InternalPricingProcedureCode: String,       InternalPricingProcedureCodeText: String,       InternalPricingCalculationStatusCode: String,       InternalPricingCalculationStatusCodeText: String,       NetWeightMeasure: String,       NetWeightUnitCode: String,       NetWeightUnitCodeText: String,       GrossWeightMeasure: String,       GrossWeightUnitCode: String,       GrossWeightUnitCodeText: String,       VolumeMeasure: String,       VolumeUnitCode: String,       VolumeUnitCodeText: String,       Simulate: Boolean,       SubmitForApproval: Boolean,       Transfer: Boolean,       WithdrawFromApproval: Boolean,       SetAsCompleted: Boolean,       PlantPartyID: String,       PlantPartyName: String,       EntityLastChangedOn: String,       ETag: String,       dataloader_KUT: String,       CustomerOrderAttachmentFolder: {| "__deferred": {| uri: String |} |},       CustomerOrderBusinessTransactionDocumentReference: {| "__deferred": {| uri: String |} |},       CustomerOrderCashDiscountTerms: {| "__deferred": {| uri: String |} |},       CustomerOrderExternalPriceComponent: {| "__deferred": {| uri: String |} |},       CustomerOrderItem: {| "__deferred": {| uri: String |} |},       CustomerOrderParty: {| "__deferred": {| uri: String |} |},       CustomerOrderPriceComponent: {| "__deferred": {| uri: String |} |},       CustomerOrderRegisteredProduct: {| "__deferred": {| uri: String |} |},       CustomerOrderTextCollection: {| "__deferred": {| uri: String |} |}    |}>
+  |}
+|} {"example": "{\\\"d\\\":{\\\"results\\\":[{\\\"__metadata\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\\",\\\"type\\\":\\\"c4codata.CustomerOrder\\\",\\\"etag\\\":\\\"W\\/\\\\\\\"datetimeoffset'2019-11-12T12%3A30%3A56.2215840Z'\\\\\\\"\\\"},\\\"ObjectID\\\":\\\"00163E0C6CDB1ED694C4D37B9E324AAE\\\",\\\"InformationLifeCycleStatusCode\\\":\\\"AC\\\",\\\"InformationLifeCycleStatusCodeText\\\":\\\"Active\\\",\\\"ClassificationCode\\\":\\\"\\\",\\\"ClassificationCodeText\\\":\\\"\\\",\\\"BuyerID\\\":\\\"\\\",\\\"FulfilmentBlockingReasonCode\\\":\\\"\\\",\\\"FulfilmentBlockingReasonCodeText\\\":\\\"\\\",\\\"ID\\\":\\\"9000000152\\\",\\\"InvoicingBlockingReasonCode\\\":\\\"\\\",\\\"InvoicingBlockingReasonCodeText\\\":\\\"\\\",\\\"LastChangeDate\\\":\\\"\\/Date(1469404800000)\\/\\\",\\\"OrderExternalLifeCycleStatusCode\\\":\\\"1\\\",\\\"OrderExternalLifeCycleStatusCodeText\\\":\\\"Open\\\",\\\"Name\\\":\\\"\\\",\\\"LanguageCode\\\":\\\"EN\\\",\\\"LanguageCodeText\\\":\\\"English\\\",\\\"ProcessingTypeCode\\\":\\\"OR\\\",\\\"ProcessingTypeCodeText\\\":\\\"Standard Order\\\",\\\"ItemListCancellationStatusCode\\\":\\\"1\\\",\\\"ItemListCancellationStatusCodeText\\\":\\\"Not Canceled\\\",\\\"ItemListFulfilmentProcessingStatusCode\\\":\\\"4\\\",\\\"ItemListFulfilmentProcessingStatusCodeText\\\":\\\"Not Relevant\\\",\\\"ApprovalStatusCode\\\":\\\"\\\",\\\"ApprovalStatusCodeText\\\":\\\"\\\",\\\"ConsistencyStatusCode\\\":\\\"2\\\",\\\"ConsistencyStatusCodeText\\\":\\\"Inconsistent\\\",\\\"OverallBlockingStatusCode\\\":\\\"1\\\",\\\"OverallBlockingStatusCodeText\\\":\\\"Not Blocked\\\",\\\"ReplicationProcessingStatusCode\\\":\\\"1\\\",\\\"ReplicationProcessingStatusCodeText\\\":\\\"Not Started\\\",\\\"DistributionChannelCode\\\":\\\"01\\\",\\\"DistributionChannelCodeText\\\":\\\"Direct sales\\\",\\\"DivisionCode\\\":\\\"01\\\",\\\"DivisionCodeText\\\":\\\"Division 1\\\",\\\"SalesGroupID\\\":\\\"\\\",\\\"SalesOfficeID\\\":\\\"\\\",\\\"SalesOrganisationID\\\":\\\"US1100\\\",\\\"SalesTerritoryID\\\":\\\"7\\\",\\\"BuyerPartyID\\\":\\\"10332\\\",\\\"DeliveryPriorityCode\\\":\\\"3\\\",\\\"DeliveryPriorityCodeText\\\":\\\"Normal\\\",\\\"TransferLocationName\\\":\\\"\\\",\\\"EmployeeResponsiblePartyID\\\":\\\"8000000001\\\",\\\"BuyerPartyName\\\":\\\"Alpha Solutions\\\",\\\"EmployeeResponsiblePartyName\\\":\\\"Mike Summers\\\",\\\"BuyerContactPartyID\\\":\\\"1000394\\\",\\\"BuyerContactPartyName\\\":\\\"Catherine Lesacher\\\",\\\"CurrencyCode\\\":\\\"USD\\\",\\\"CurrencyCodeText\\\":\\\"US Dollar\\\",\\\"PriceDateTime\\\":\\\"\\/Date(1469423646339)\\/\\\",\\\"ProductRecipientPartyID\\\":\\\"10332\\\",\\\"ProductRecipientPartyName\\\":\\\"Alpha Solutions\\\",\\\"RequestedFulfillmentStartDateTime\\\":\\\"2016-07-27T00:00:00Z\\\",\\\"timeZoneCode\\\":\\\"UTC\\\",\\\"timeZoneCodeText\\\":\\\"UTC+0\\\",\\\"CancellationReasonCode\\\":\\\"\\\",\\\"CancellationReasonCodeText\\\":\\\"\\\",\\\"SalesUnitPartyID\\\":\\\"US1100\\\",\\\"CalculationStatusCode\\\":\\\"1\\\",\\\"CalculationStatusCodeText\\\":\\\"Not Calculated\\\",\\\"ExternalPriceDocumentBaseBusinessTransactionDocumentUUID\\\":\\\"00163E0C-6CDB-1ED6-94C4-D37B9E324AAE\\\",\\\"PricingProcedureCode\\\":\\\"\\\",\\\"PricingProcedureCodeText\\\":\\\"\\\",\\\"DateTime\\\":\\\"\\/Date(1469423646339)\\/\\\",\\\"OrderReasonCode\\\":\\\"\\\",\\\"OrderReasonCodeText\\\":\\\"\\\",\\\"MaintenanceModeInternalOnlyMainDiscount\\\":\\\"0.00000000000000\\\",\\\"NetAmount\\\":\\\"0.000000\\\",\\\"NetAmountCurrencyCode\\\":\\\"\\\",\\\"NetAmountCurrencyCodeText\\\":\\\"\\\",\\\"GrossAmount\\\":\\\"0.000000\\\",\\\"GrossAmountCurrencyCode\\\":\\\"\\\",\\\"GrossAmountCurrencyCodeText\\\":\\\"\\\",\\\"TaxAmount\\\":\\\"0.000000\\\",\\\"TaxAmountCurrencyCode\\\":\\\"\\\",\\\"TaxAmountCurrencyCodeText\\\":\\\"\\\",\\\"InternalPricingProcedureCode\\\":\\\"\\\",\\\"InternalPricingProcedureCodeText\\\":\\\"\\\",\\\"InternalPricingCalculationStatusCode\\\":\\\"\\\",\\\"InternalPricingCalculationStatusCodeText\\\":\\\"\\\",\\\"NetWeightMeasure\\\":\\\"0.00000000000000\\\",\\\"NetWeightUnitCode\\\":\\\"\\\",\\\"NetWeightUnitCodeText\\\":\\\"\\\",\\\"GrossWeightMeasure\\\":\\\"0.00000000000000\\\",\\\"GrossWeightUnitCode\\\":\\\"\\\",\\\"GrossWeightUnitCodeText\\\":\\\"\\\",\\\"VolumeMeasure\\\":\\\"0.00000000000000\\\",\\\"VolumeUnitCode\\\":\\\"\\\",\\\"VolumeUnitCodeText\\\":\\\"\\\",\\\"Simulate\\\":false,\\\"SubmitForApproval\\\":false,\\\"Transfer\\\":false,\\\"WithdrawFromApproval\\\":false,\\\"SetAsCompleted\\\":false,\\\"PlantPartyID\\\":\\\"\\\",\\\"PlantPartyName\\\":\\\"\\\",\\\"EntityLastChangedOn\\\":\\\"\\/Date(1469440124805)\\/\\\",\\\"ETag\\\":\\\"\\/Date(1573561856221)\\/\\\",\\\"dataloader_KUT\\\":\\\"\\\",\\\"CustomerOrderAttachmentFolder\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderAttachmentFolder\\\"}},\\\"CustomerOrderBusinessTransactionDocumentReference\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderBusinessTransactionDocumentReference\\\"}},\\\"CustomerOrderCashDiscountTerms\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderCashDiscountTerms\\\"}},\\\"CustomerOrderExternalPriceComponent\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderExternalPriceComponent\\\"}},\\\"CustomerOrderItem\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderItem\\\"}},\\\"CustomerOrderParty\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderParty\\\"}},\\\"CustomerOrderPriceComponent\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderPriceComponent\\\"}},\\\"CustomerOrderRegisteredProduct\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderRegisteredProduct\\\"}},\\\"CustomerOrderTextCollection\\\":{\\\"__deferred\\\":{\\\"uri\\\":\\\"https:\\/\\/sandbox.api.sap.com\\/sap\\/c4c\\/odata\\/v1\\/c4codataapi\\/CustomerOrderCollection('00163E0C6CDB1ED694C4D37B9E324AAE')\\/CustomerOrderTextCollection\\\"}}}]}}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="orders_output_data" format="json">
+      <types:shape format="weave" example="examples/OrdersOutput.json"><![CDATA[%dw 2.0
+
+type orders_output_data = {|
+  ObjectID: String, 
+  InformationLifeCycleStatusCode: String, 
+  InformationLifeCycleStatusCodeText: String, 
+  ID: String, 
+  LastChangeDate: String, 
+  OrderExternalLifeCycleStatusCode: String, 
+  OrderExternalLifeCycleStatusCodeText: String, 
+  LanguageCode: String, 
+  LanguageCodeText: String, 
+  ProcessingTypeCode: String, 
+  ProcessingTypeCodeText: String, 
+  ItemListCancellationStatusCode: String, 
+  ItemListCancellationStatusCodeText: String, 
+  ItemListFulfilmentProcessingStatusCode: String, 
+  ItemListFulfilmentProcessingStatusCodeText: String, 
+  ConsistencyStatusCode: String, 
+  ConsistencyStatusCodeText: String, 
+  OverallBlockingStatusCode: String, 
+  OverallBlockingStatusCodeText: String, 
+  ReplicationProcessingStatusCode: String, 
+  ReplicationProcessingStatusCodeText: String, 
+  DistributionChannelCode: String, 
+  DistributionChannelCodeText: String, 
+  DivisionCode: String, 
+  DivisionCodeText: String, 
+  SalesOrganisationID: String, 
+  SalesTerritoryID: String, 
+  BuyerPartyID: String, 
+  DeliveryPriorityCode: String, 
+  DeliveryPriorityCodeText: String, 
+  EmployeeResponsiblePartyID: String, 
+  BuyerPartyName: String, 
+  EmployeeResponsiblePartyName: String, 
+  BuyerContactPartyID: String, 
+  BuyerContactPartyName: String, 
+  CurrencyCode: String, 
+  CurrencyCodeText: String, 
+  PriceDateTime: String, 
+  ProductRecipientPartyID: String, 
+  ProductRecipientPartyName: String, 
+  RequestedFulfillmentStartDateTime: String, 
+  timeZoneCode: String, 
+  timeZoneCodeText: String, 
+  SalesUnitPartyID: String, 
+  CalculationStatusCode: String, 
+  CalculationStatusCodeText: String, 
+  ExternalPriceDocumentBaseBusinessTransactionDocumentUUID: String, 
+  DateTime: String, 
+  MaintenanceModeInternalOnlyMainDiscount: String, 
+  NetAmount: String, 
+  GrossAmount: String, 
+  TaxAmount: String, 
+  NetWeightMeasure: String, 
+  GrossWeightMeasure: String, 
+  VolumeMeasure: String, 
+  Simulate: Boolean, 
+  SubmitForApproval: Boolean, 
+  Transfer: Boolean, 
+  WithdrawFromApproval: Boolean, 
+  SetAsCompleted: Boolean, 
+  EntityLastChangedOn: String, 
+  ETag: String
+|} {"example": "{\\\"ObjectID\\\":\\\"00163E0C6CDB1ED694C4D37B9E324AAE\\\",\\\"InformationLifeCycleStatusCode\\\":\\\"AC\\\",\\\"InformationLifeCycleStatusCodeText\\\":\\\"Active\\\",\\\"ID\\\":\\\"9000000152\\\",\\\"LastChangeDate\\\":\\\"\\/Date(1469404800000)\\/\\\",\\\"OrderExternalLifeCycleStatusCode\\\":\\\"1\\\",\\\"OrderExternalLifeCycleStatusCodeText\\\":\\\"Open\\\",\\\"LanguageCode\\\":\\\"EN\\\",\\\"LanguageCodeText\\\":\\\"English\\\",\\\"ProcessingTypeCode\\\":\\\"OR\\\",\\\"ProcessingTypeCodeText\\\":\\\"Standard Order\\\",\\\"ItemListCancellationStatusCode\\\":\\\"1\\\",\\\"ItemListCancellationStatusCodeText\\\":\\\"Not Canceled\\\",\\\"ItemListFulfilmentProcessingStatusCode\\\":\\\"4\\\",\\\"ItemListFulfilmentProcessingStatusCodeText\\\":\\\"Not Relevant\\\",\\\"ConsistencyStatusCode\\\":\\\"2\\\",\\\"ConsistencyStatusCodeText\\\":\\\"Inconsistent\\\",\\\"OverallBlockingStatusCode\\\":\\\"1\\\",\\\"OverallBlockingStatusCodeText\\\":\\\"Not Blocked\\\",\\\"ReplicationProcessingStatusCode\\\":\\\"1\\\",\\\"ReplicationProcessingStatusCodeText\\\":\\\"Not Started\\\",\\\"DistributionChannelCode\\\":\\\"01\\\",\\\"DistributionChannelCodeText\\\":\\\"Direct sales\\\",\\\"DivisionCode\\\":\\\"01\\\",\\\"DivisionCodeText\\\":\\\"Division 1\\\",\\\"SalesOrganisationID\\\":\\\"US1100\\\",\\\"SalesTerritoryID\\\":\\\"7\\\",\\\"BuyerPartyID\\\":\\\"10332\\\",\\\"DeliveryPriorityCode\\\":\\\"3\\\",\\\"DeliveryPriorityCodeText\\\":\\\"Normal\\\",\\\"EmployeeResponsiblePartyID\\\":\\\"8000000001\\\",\\\"BuyerPartyName\\\":\\\"Alpha Solutions\\\",\\\"EmployeeResponsiblePartyName\\\":\\\"Mike Summers\\\",\\\"BuyerContactPartyID\\\":\\\"1000394\\\",\\\"BuyerContactPartyName\\\":\\\"Catherine Lesacher\\\",\\\"CurrencyCode\\\":\\\"USD\\\",\\\"CurrencyCodeText\\\":\\\"US Dollar\\\",\\\"PriceDateTime\\\":\\\"\\/Date(1469423646339)\\/\\\",\\\"ProductRecipientPartyID\\\":\\\"10332\\\",\\\"ProductRecipientPartyName\\\":\\\"Alpha Solutions\\\",\\\"RequestedFulfillmentStartDateTime\\\":\\\"2016-07-27T00:00:00Z\\\",\\\"timeZoneCode\\\":\\\"UTC\\\",\\\"timeZoneCodeText\\\":\\\"UTC+0\\\",\\\"SalesUnitPartyID\\\":\\\"US1100\\\",\\\"CalculationStatusCode\\\":\\\"1\\\",\\\"CalculationStatusCodeText\\\":\\\"Not Calculated\\\",\\\"ExternalPriceDocumentBaseBusinessTransactionDocumentUUID\\\":\\\"00163E0C-6CDB-1ED6-94C4-D37B9E324AAE\\\",\\\"DateTime\\\":\\\"\\/Date(1469423646339)\\/\\\",\\\"MaintenanceModeInternalOnlyMainDiscount\\\":\\\"0.00000000000000\\\",\\\"NetAmount\\\":\\\"0.000000\\\",\\\"GrossAmount\\\":\\\"0.000000\\\",\\\"TaxAmount\\\":\\\"0.000000\\\",\\\"NetWeightMeasure\\\":\\\"0.00000000000000\\\",\\\"GrossWeightMeasure\\\":\\\"0.00000000000000\\\",\\\"VolumeMeasure\\\":\\\"0.00000000000000\\\",\\\"Simulate\\\":false,\\\"SubmitForApproval\\\":false,\\\"Transfer\\\":false,\\\"WithdrawFromApproval\\\":false,\\\"SetAsCompleted\\\":false,\\\"EntityLastChangedOn\\\":\\\"\\/Date(1469440124805)\\/\\\",\\\"ETag\\\":\\\"\\/Date(1573561856221)\\/\\\"}"}
+
+]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#05d69a6f-751f-4261-ab75-a4b750de37bd">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="orders_input_data[]"/>
+        </types:message>
+      </types:input-event>
+      <types:output-event>
+        <types:message>
+          <types:payload type="orders_output_data"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+</types:mule>
